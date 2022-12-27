@@ -1,12 +1,13 @@
 #ifndef HTTP_SERVER_H
 #define HTTP_SERVER_H
+#include "Logger.h"
+#include "TcpServer.h"
+#include "http_response.hpp"
 
+#include <regex>
 #include <string>
 #include <string.h>
 #include <functional>
-
-#include "muduo/TcpServer.h"
-#include "muduo/Logger.h"
 
 class HttpServer {
 public:
@@ -19,6 +20,7 @@ private:
 
   EventLoop *loop_;
   TcpServer server_;
+  HttpResponse response_;
 };
 
 

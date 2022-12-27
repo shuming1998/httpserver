@@ -27,17 +27,6 @@ LOG_FATAL("myMuduo: %d", int);
 LOG_DEBUG("myMuduo: %d", int);
 ```
 
-#### 3、回声测试实例：
-
-```shell
-$ cd example
-$ make clean
-$ make
-$ ./test
-# 另起终端
-$ telnet 127.0.0.1 8000
-```
-
 
 
 
