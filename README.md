@@ -22,18 +22,19 @@ $ ./autobuild.sh
 
 ```shell
 $ cd bin
-$ ./http_server
+# port can be set arbitrarily, if not specified, the default value is 3000
+$ ./http_server 8888   
 ```
 
 #### 3.2. Http test:
 
 Open a browser and visit the URL: 
 
-```http
+```
 127.0.0.1:3000/index1.html
 ```
 
-```http
+```
 127.0.0.1:3000/index.php?id=1&name=csm
 ```
 
