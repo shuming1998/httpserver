@@ -11,7 +11,7 @@ $ sudo apt-get install php-cgi
 #### 2. Build:
 
 ```shell
-$ cd HTTP_Server
+$ cd Http_Server
 $ chmod +x ./autobuild.sh
 $ ./autobuild.sh
 ```
