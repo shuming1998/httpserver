@@ -3,6 +3,7 @@
 
 #include <regex>
 #include <iostream>
+#include <filesystem>
 
 HttpResponse::HttpResponse() : fileSize_(0), fp_(nullptr) {}
 HttpResponse::~HttpResponse() {}
@@ -80,6 +81,7 @@ bool HttpResponse::solveRequest(std::string request) {
     cmd.append(filePath.append(".html"));
     LOG_INFO("======query======:\n%s", query.c_str());
     LOG_INFO("======cmd======:\n%s", cmd.c_str());
+    std::cout << "========Current path is========\n" << std::filesystem::current_path() << '\n';
     system(cmd.c_str());
     int idx = filePath.find_first_not_of("/");
   }
@@ -93,10 +95,10 @@ bool HttpResponse::solveRequest(std::string request) {
   //* 将文件指针移动到结尾
   fseek(fp_, 0, SEEK_END);
   //* 根据结尾指针位置获取文件大小
-  int fileSize = ftell(fp_);
+  fileSize_ = ftell(fp_);
   //* 恢复指针位置
   fseek(fp_, 0, 0);
-  LOG_INFO("FILE size is: %d", fileSize);
+  LOG_INFO("FILE size is: %ld", fileSize_);
 
   if (filetype == "php") {
     char c = 0;
@@ -109,20 +111,8 @@ bool HttpResponse::solveRequest(std::string request) {
         break;
       }
     }
-    fileSize = fileSize - headSize;
+    fileSize_ = fileSize_ - headSize;
   }
-
-  //* 回应 http GET 请求
-  std::string reMsg = "";
-  //* 消息头
-  reMsg.append("HTTP/1.1 200 OK\r\n");
-  reMsg.append("Server:MDHttp\r\n");
-  reMsg.append("Content-Type: text/html\r\n");
-  reMsg.append("Content-Length: ");
-  char size[128] = {0};
-  sprintf(size, "%d", fileSize);
-  reMsg.append("size\r\n");
-  reMsg.append("\r\n");
   return true;
 }
 
@@ -141,7 +131,7 @@ std::string HttpResponse::getHeader() {
   return header;
 }
 
-int HttpResponse::read(char *msg, int msgLen) {
+int HttpResponse::readFile(char *msg, int msgLen) {
   return fread(msg, 1, sizeof(msg), fp_);
 }
 

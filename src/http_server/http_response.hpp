@@ -8,7 +8,7 @@ public:
   ~HttpResponse();
 
   std::string getHeader();
-  int read(char *msg, int msgLen);
+  int readFile(char *msg, int msgLen);
   bool solveRequest(std::string request);
 
 private:

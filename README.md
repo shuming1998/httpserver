@@ -1,1 +1,51 @@
 # HTTP_Server
+
+#### 1. Environment:
+
+```shell
+$ sudo apt-get install php-cgi
+```
+
+
+
+#### 2. Build:
+
+```shell
+$ cd HTTP_Server
+$ chmod +x ./autobuild.sh
+$ ./autobuild.sh
+```
+
+
+
+#### 3.1. Run server:
+
+```shell
+$ cd bin
+$ ./http_server
+```
+
+#### 3.2. Http test:
+
+Open a browser and visit the URL: 
+
+```http
+127.0.0.1:3000/index1.html
+```
+
+```http
+127.0.0.1:3000/index.php?id=1&name=csm
+```
+
+
+
+#### 4. About moduo:
+
+https://github.com/chenshuo/muduo
+
+
+
+#### 5. Handsolve muduo(this repo used):
+
+https://github.com/shuming1998/Muduo_CPP11
+
