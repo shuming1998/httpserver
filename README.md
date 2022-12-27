@@ -31,11 +31,11 @@ $ ./http_server 8888
 Open a browser and visit the URL: 
 
 ```
-127.0.0.1:3000/index1.html
+127.0.0.1:8888/index1.html
 ```
 
 ```
-127.0.0.1:3000/index.php?id=1&name=csm
+127.0.0.1:8888/index.php?id=1&name=csm
 ```
 
 
