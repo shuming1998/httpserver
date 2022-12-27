@@ -1,5 +1,7 @@
 #include "http_server.hpp"
 
+#include <signal.h>
+
 void HttpServer::onConnection(const TcpConnectionPtr &conn) {
   if (conn->connected()) {
     LOG_INFO("Connection success : %s\n", conn->peerAddress().toIpPort().c_str());
@@ -44,11 +46,19 @@ HttpServer::HttpServer(EventLoop *loop, const InetAddress &addr, const std::stri
 void HttpServer::start() { server_.start(); }
 
 int main(int argc, char *argv[]) {
+  signal(SIGPIPE, SIG_IGN);
+
+  unsigned short int port = 3000;
+  if (argc > 1) {
+    port = atoi(argv[1]);
+  }
+
   EventLoop loop;
-  InetAddress addr(3000);
+  InetAddress addr(port);
+
   HttpServer server(&loop, addr, "HttpServer-01");
-  // 开启子线程 loop，注册 wakeupfd
-  server.start(); // listen loopthread listenfd => acceptChannel => mainLoop
-  loop.loop(); // 启动 mainLoop Poller
+  server.start();
+  loop.loop();
+
   return 0;
 }
